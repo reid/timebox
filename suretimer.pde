@@ -147,12 +147,15 @@ void loop()
         startMillis = millis();
         disp.clear();
         
-        // draw a colon
-        toolbox.setPixel(18, 2, 1, true);
-        toolbox.setPixel(18, 4, 1, true);
+        draw_colon(18);
         
         draw_digits(20, second());
-        draw_digits(6, minute());
+
+        uint8_t minutes_x = 6;
+        int minutes = (minute() + (60 * hour()));
+        if (minutes > 99)
+          minutes_x = 0; // space for extra glyph
+        draw_digits(minutes_x, minutes);
 
         disp.syncDisplays();
     }
@@ -220,6 +223,11 @@ void loop()
     }
   }  
   
+}
+
+void draw_colon (uint8_t x) {
+  toolbox.setPixel(x, 2, 1, true);
+  toolbox.setPixel(x, 4, 1, true);
 }
 
 void draw_digits (uint8_t x, int digits) { 
