@@ -164,7 +164,7 @@ void loop()
   if (state == STATE_SPLASH) {
       disp.clear();
       pos = 32;
-      timePeriod = 30;
+      timePeriod = 25;
       elapsedMillis = 1000;
       toolbox.setBrightness(16);
       state = STATE_SPLASH + 1;
@@ -194,7 +194,7 @@ void loop()
   if (state == STATE_READY) {
     disp.clear();
     pos = 0;
-    timePeriod = 500;
+    timePeriod = 100;
     elapsedMillis = 1100;
     toolbox.setBrightness(14);
     state = STATE_READY + 1;
@@ -204,17 +204,28 @@ void loop()
     if (elapsedMillis > timePeriod) {
       startMillis = millis();
       
-      if (pos == 0) {
+      if (pos > 19) {
+        state = STATE_TIMER;
+      } else if (pos == 0) {
         drawString(0, 0, "ready", false);
-      } else if (pos == 1) {
+      } else if (pos == 4) {
         disp.clear();
         drawString(10, 0, "set", false);
-      } else if (pos == 2) {
+      } else if (pos == 7) {
+        fill_display();
+      } else if (pos == 8) {
         disp.clear();
-        toolbox.setBrightness(16);
-        drawString(20, 0, "go", true);
-      } else if (pos > 2) {
-        state = STATE_TIMER;
+        drawString(3, 0, "go", false);
+      } else if (pos == 9) {
+        drawString(16, 0, "go", false);
+      } else if (pos == 10) {
+        fill_display();
+      } else if (pos == 11) {
+        disp.clear();
+        drawString(7, 0, "YOU", false);
+      } else if (pos == 15) {
+        disp.clear();
+        drawString(4, 0, "ROCK", false);
       }
       
       pos++;
