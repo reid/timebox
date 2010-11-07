@@ -37,7 +37,7 @@
 #define STATE_READY 70
 
 #define SLEEP_PIN 2
-#define SLEEP_DEBOUNCE_MS 1500 // wait this long before sleeping again
+#define SLEEP_DEBOUNCE_MS 100
 
 #define TOGGLE_PIN 13
 
